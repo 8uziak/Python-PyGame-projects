@@ -9,3 +9,7 @@ The graphics replicate the original snake as best I can. All the images in my ga
 ### Sound
 
 I found the sound of a snake eating an apple on a website that has a free sound library [freesound](https://freesound.org).
+
+### Gameplay
+
+![](https://github.com/8uziak/Python-PyGame-projects/blob/main/Snake-Nokia3310/snake.gif)

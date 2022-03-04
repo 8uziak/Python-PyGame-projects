@@ -9,7 +9,7 @@ class Snake:
         self.new_block = False
         self.head = head_right
 
-        self.eat_sound = pygame.mixer.Sound('Snake-Nokia3310/Sounds/sound_1.wav')
+        self.eat_sound = pygame.mixer.Sound('Sounds/sound_1.wav')
 
     def place_snake(self):
         self.update_head_grafics()
@@ -177,6 +177,10 @@ class Main:
         score_rect = score_render.get_rect(center = (200, 100))
         screen.blit(score_render,score_rect)            
 
+    def snake_eat_animation(self):
+        if self.fruit.pos - self.snake.body[0] == Vector2(1,0):
+            None
+
     def end_game(self):
         pygame.quit()
         sys.exit()
@@ -198,63 +202,63 @@ for l in range(60):
     
 
 #importing grafics 
-apple = pygame.image.load('Snake-Nokia3310/Images/apple.png')
+apple = pygame.image.load('Images/apple.png')
 apple = pygame.transform.scale(apple, (20,20))
 
-head_right = pygame.image.load('Snake-Nokia3310/Images/head_right.png')
+head_right = pygame.image.load('Images/head_right.png')
 head_right = pygame.transform.scale(head_right, (20,20))
 
-head_left = pygame.image.load('Snake-Nokia3310/Images/head_left.png')
+head_left = pygame.image.load('Images/head_left.png')
 head_left = pygame.transform.scale(head_left, (20,20))
 
-head_up = pygame.image.load('Snake-Nokia3310/Images/head_up.png')
+head_up = pygame.image.load('Images/head_up.png')
 head_up = pygame.transform.scale(head_up, (20,20))
 
-head_down = pygame.image.load('Snake-Nokia3310/Images/head_down.png')
+head_down = pygame.image.load('Images/head_down.png')
 head_down = pygame.transform.scale(head_down, (20,20))
 
-eat_right = pygame.image.load('Snake-Nokia3310/Images/eat_right.png')
+eat_right = pygame.image.load('Images/eat_right.png')
 eat_right = pygame.transform.scale(eat_right, (20,20))
 
-eat_left = pygame.image.load('Snake-Nokia3310/Images/eat_right.png')
+eat_left = pygame.image.load('Images/eat_right.png')
 eat_right = pygame.transform.scale(eat_right, (20,20))
 
-eat_up = pygame.image.load('Snake-Nokia3310/Images/eat_up.png')
+eat_up = pygame.image.load('Images/eat_up.png')
 eat_up = pygame.transform.scale(eat_up, (20,20))
 
-eat_down = pygame.image.load('Snake-Nokia3310/Images/eat_down.png')
+eat_down = pygame.image.load('Images/eat_down.png')
 eat_down = pygame.transform.scale(eat_down, (20,20))
 
-body_right = pygame.image.load('Snake-Nokia3310/Images/body_right.png')
+body_right = pygame.image.load('Images/body_right.png')
 body_right  = pygame.transform.scale(body_right, (20,20))
 
-body_left = pygame.image.load('Snake-Nokia3310/Images/body_left.png')
+body_left = pygame.image.load('Images/body_left.png')
 body_left  = pygame.transform.scale(body_left, (20,20))
 
-body_up = pygame.image.load('Snake-Nokia3310/Images/body_up.png')
+body_up = pygame.image.load('Images/body_up.png')
 body_up = pygame.transform.scale(body_up, (20,20))
 
-body_down = pygame.image.load('Snake-Nokia3310/Images/body_down.png')
+body_down = pygame.image.load('Images/body_down.png')
 body_down  = pygame.transform.scale(body_down, (20,20))
 
-area = pygame.image.load('Snake-Nokia3310/Images/area.png')
+area = pygame.image.load('Images/area.png')
 area = pygame.transform.scale(area, (20,20))
 
-area_up = pygame.image.load('Snake-Nokia3310/Images/area_up.png')
+area_up = pygame.image.load('Images/area_up.png')
 area_up = pygame.transform.scale(area_up, (20,20))
 
-area_right = pygame.image.load('Snake-Nokia3310/Images/area_right.png')
+area_right = pygame.image.load('Images/area_right.png')
 area_right = pygame.transform.scale(area_right, (20,20))
 
-area_left = pygame.image.load('Snake-Nokia3310/Images/area_left.png')
+area_left = pygame.image.load('Images/area_left.png')
 area_left = pygame.transform.scale(area_left, (20,20))
 
-area_down = pygame.image.load('Snake-Nokia3310/Images/area_down.png')
+area_down = pygame.image.load('Images/area_down.png')
 area_down = pygame.transform.scale(area_down, (20,20))
 ###
 
 # font for the score value
-score_font = pygame.font.Font('Snake-Nokia3310/Font/nokia3310.ttf', 100)
+score_font = pygame.font.Font('Font/nokia3310.ttf', 100)
 
 # window size
 screen = pygame.display.set_mode((block_size * 60,block_size * 40))

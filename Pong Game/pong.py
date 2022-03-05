@@ -48,6 +48,35 @@ class LeftPlate:
         self.y_pos = self.y_og
         
 
+# right plate is operated by a human with arrow keys
+class RightPlate:
+
+    #beginning positions for x and y
+    x_og = 1 
+    y_og = 1 
+
+    def __init__(self):
+
+        self.x_pos = self.x_og 
+        self.y_pos = self.y_og
+
+        self.body = (1,2,plate_wh,plate_ht)
+        self.move = False
+    
+    def draw(self):
+        pygame.draw.rect(screen,white,self.body)
+
+    def move_plate(self):
+        if self.move == True:
+            self.x_pos -= self.VEL 
+        else:
+            None
+
+    def reset(self):
+        self.x_pos = self.x_og 
+        self.y_pos = self.y_og
+        
+
 
 class Main:
     def __init__(self):

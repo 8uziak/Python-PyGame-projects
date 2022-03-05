@@ -1,4 +1,3 @@
-from tkinter.tix import X_REGION
 import pygame,sys
 
 pygame.init()

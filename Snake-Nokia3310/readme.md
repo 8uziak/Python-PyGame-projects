@@ -13,3 +13,7 @@ I found the sound of a snake eating an apple on a website that has a free sound 
 ### Gameplay
 
 ![](https://github.com/8uziak/Python-PyGame-projects/blob/main/Snake-Nokia3310/snake.gif)
+
+### UPDATE [09.03.2022]
+
+In this update I focused 100% on OOP (classes, __name__ == "__main__") and improving code readability.

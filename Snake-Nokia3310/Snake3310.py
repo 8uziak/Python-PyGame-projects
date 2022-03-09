@@ -2,6 +2,87 @@
 import pygame, sys, random
 from pygame.math import Vector2
 
+
+# set up pygame
+pygame.mixer.pre_init(44100,16,512)
+pygame.mixer.init()
+pygame.init()
+pygame.display.set_caption('Snake Nokia 3310 by github.com/8uziak')
+       
+block_size = 20   # length of each side of a square (20 horizontally and 10 vertically)
+
+#list
+lis = []
+for l in range(60):
+    lis.append(l)
+    
+
+#importing grafics 
+apple = pygame.image.load('Images/apple.png')
+apple = pygame.transform.scale(apple, (20,20))
+
+head_right = pygame.image.load('Images/head_right.png')
+head_right = pygame.transform.scale(head_right, (20,20))
+
+head_left = pygame.image.load('Images/head_left.png')
+head_left = pygame.transform.scale(head_left, (20,20))
+
+head_up = pygame.image.load('Images/head_up.png')
+head_up = pygame.transform.scale(head_up, (20,20))
+
+head_down = pygame.image.load('Images/head_down.png')
+head_down = pygame.transform.scale(head_down, (20,20))
+
+eat_right = pygame.image.load('Images/eat_right.png')
+eat_right = pygame.transform.scale(eat_right, (20,20))
+
+eat_left = pygame.image.load('Images/eat_right.png')
+eat_right = pygame.transform.scale(eat_right, (20,20))
+
+eat_up = pygame.image.load('Images/eat_up.png')
+eat_up = pygame.transform.scale(eat_up, (20,20))
+
+eat_down = pygame.image.load('Images/eat_down.png')
+eat_down = pygame.transform.scale(eat_down, (20,20))
+
+body_right = pygame.image.load('Images/body_right.png')
+body_right  = pygame.transform.scale(body_right, (20,20))
+
+body_left = pygame.image.load('Images/body_left.png')
+body_left  = pygame.transform.scale(body_left, (20,20))
+
+body_up = pygame.image.load('Images/body_up.png')
+body_up = pygame.transform.scale(body_up, (20,20))
+
+body_down = pygame.image.load('Images/body_down.png')
+body_down  = pygame.transform.scale(body_down, (20,20))
+
+area = pygame.image.load('Images/area.png')
+area = pygame.transform.scale(area, (20,20))
+
+area_up = pygame.image.load('Images/area_up.png')
+area_up = pygame.transform.scale(area_up, (20,20))
+
+area_right = pygame.image.load('Images/area_right.png')
+area_right = pygame.transform.scale(area_right, (20,20))
+
+area_left = pygame.image.load('Images/area_left.png')
+area_left = pygame.transform.scale(area_left, (20,20))
+
+area_down = pygame.image.load('Images/area_down.png')
+area_down = pygame.transform.scale(area_down, (20,20))
+###
+
+# font for the score value
+score_font = pygame.font.Font('Font/nokia3310.ttf', 100)
+
+# window size
+screen = pygame.display.set_mode((block_size * 60,block_size * 40))
+clock = pygame.time.Clock()
+
+screen_update = pygame.USEREVENT
+pygame.time.set_timer(screen_update, 150)
+
 class Snake:
     def __init__(self):
         self.body = [Vector2(30,24),Vector2(29,24),Vector2(28,24)]
@@ -91,14 +172,48 @@ class Fruit:
 
 class Main:
     def __init__(self):
+
         self.snake = Snake()
         self.fruit = Fruit()
+
+        self.game_on = True
+        while self.game_on:
+            self.whileloop()
+
+        
+    
+    def whileloop(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.end_game()
+            if event.type == screen_update:
+                self.update()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    if self.snake.direction.y != 1:
+                        self.snake.direction = Vector2(0,-1)
+
+                if event.key == pygame.K_RIGHT:
+                    if self.snake.direction.x != -1:
+                        self.snake.direction = Vector2(1, 0)
+    
+                if event.key == pygame.K_LEFT:
+                    if self.snake.direction.x != 1:
+                        self.snake.direction = Vector2(-1, 0)
+    
+                if event.key == pygame.K_DOWN:
+                    if self.snake.direction.y != -1:
+                        self.snake.direction = Vector2(0, 1)
+
+        self.place_elements()
+        pygame.display.update()
+        clock.tick(60)
 
     def update(self):
         self.snake.move_snake()
         self.check_collision()
         self.check_game_over()
-
+    
     def place_elements(self):
         self.place_grass()
         self.snake.place_snake()
@@ -185,115 +300,6 @@ class Main:
         pygame.quit()
         sys.exit()
 
-# set up pygame
-pygame.mixer.pre_init(44100,16,512)
-pygame.mixer.init()
-pygame.init()
-pygame.display.set_caption('Snake Nokia 3310 by github.com/8uziak')
 
-                
-block_size = 20   # length of each side of a square (20 horizontally and 10 vertically)
-
-
-#list
-lis = []
-for l in range(60):
-    lis.append(l)
-    
-
-#importing grafics 
-apple = pygame.image.load('Images/apple.png')
-apple = pygame.transform.scale(apple, (20,20))
-
-head_right = pygame.image.load('Images/head_right.png')
-head_right = pygame.transform.scale(head_right, (20,20))
-
-head_left = pygame.image.load('Images/head_left.png')
-head_left = pygame.transform.scale(head_left, (20,20))
-
-head_up = pygame.image.load('Images/head_up.png')
-head_up = pygame.transform.scale(head_up, (20,20))
-
-head_down = pygame.image.load('Images/head_down.png')
-head_down = pygame.transform.scale(head_down, (20,20))
-
-eat_right = pygame.image.load('Images/eat_right.png')
-eat_right = pygame.transform.scale(eat_right, (20,20))
-
-eat_left = pygame.image.load('Images/eat_right.png')
-eat_right = pygame.transform.scale(eat_right, (20,20))
-
-eat_up = pygame.image.load('Images/eat_up.png')
-eat_up = pygame.transform.scale(eat_up, (20,20))
-
-eat_down = pygame.image.load('Images/eat_down.png')
-eat_down = pygame.transform.scale(eat_down, (20,20))
-
-body_right = pygame.image.load('Images/body_right.png')
-body_right  = pygame.transform.scale(body_right, (20,20))
-
-body_left = pygame.image.load('Images/body_left.png')
-body_left  = pygame.transform.scale(body_left, (20,20))
-
-body_up = pygame.image.load('Images/body_up.png')
-body_up = pygame.transform.scale(body_up, (20,20))
-
-body_down = pygame.image.load('Images/body_down.png')
-body_down  = pygame.transform.scale(body_down, (20,20))
-
-area = pygame.image.load('Images/area.png')
-area = pygame.transform.scale(area, (20,20))
-
-area_up = pygame.image.load('Images/area_up.png')
-area_up = pygame.transform.scale(area_up, (20,20))
-
-area_right = pygame.image.load('Images/area_right.png')
-area_right = pygame.transform.scale(area_right, (20,20))
-
-area_left = pygame.image.load('Images/area_left.png')
-area_left = pygame.transform.scale(area_left, (20,20))
-
-area_down = pygame.image.load('Images/area_down.png')
-area_down = pygame.transform.scale(area_down, (20,20))
-###
-
-# font for the score value
-score_font = pygame.font.Font('Font/nokia3310.ttf', 100)
-
-# window size
-screen = pygame.display.set_mode((block_size * 60,block_size * 40))
-clock = pygame.time.Clock()
-
-screen_update = pygame.USEREVENT
-pygame.time.set_timer(screen_update, 150)
-
-
-main = Main()
-game_on = True
-
-while game_on:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            main.end_game()
-        if event.type == screen_update:
-            main.update()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                if main.snake.direction.y != 1:
-                    main.snake.direction = Vector2(0,-1)
-
-            if event.key == pygame.K_RIGHT:
-                if main.snake.direction.x != -1:
-                    main.snake.direction = Vector2(1, 0)
- 
-            if event.key == pygame.K_LEFT:
-                if main.snake.direction.x != 1:
-                    main.snake.direction = Vector2(-1, 0)
- 
-            if event.key == pygame.K_DOWN:
-                if main.snake.direction.y != -1:
-                    main.snake.direction = Vector2(0, 1)
-
-    main.place_elements()
-    pygame.display.update()
-    clock.tick(60)
+if __name__ == '__main__':
+    Main()

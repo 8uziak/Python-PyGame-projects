@@ -1,14 +1,16 @@
 import pygame,sys
 
 pygame.init()
-pygame.display.set_caption('Pong Game by github.com/8uziak')
+pygame.display.set_caption('Pong Game')
 
-Widgh, Height = 400, 300
+widgh, height = 400, 300
 
-screen = pygame.display.set_mode((Widgh,Height))
+screen = pygame.display.set_mode((widgh,height))
 clock = pygame.time.Clock()
 
 fps = 60 
+
+radius = 6
 
 screen_update = pygame.USEREVENT
 pygame.time.set_timer(screen_update, 200)
@@ -19,97 +21,117 @@ white = pygame.Color(255,255,255)
 plate_wh, plate_ht = 10, 40 #paddle's width and height
 
 
-class LeftPlate:
 
-    #beginning positions for x and y
-    x_og = 1 
-    y_og = 1 
-
+class PongPlateArrows():
     def __init__(self):
 
-        self.x_pos = self.x_og 
-        self.y_pos = self.y_og
+        self.widgh = widgh - 20
+        self.height = height / 2 - 70
 
-        self.body = (1,2,plate_wh,plate_ht)
-        self.move = False
+        self.plate_wh = plate_wh
+        self.plate_ht = plate_ht
+      
     
-    def draw(self):
-        pygame.draw.rect(screen,white,self.body)
+    def draw_plate(self):
+        self.plate = pygame.Rect(self.widgh, self.height, self.plate_wh,self.plate_ht)
+        pygame.draw.rect(screen,white,self.plate)
+    
 
-    def move_plate(self):
-        if self.move == True:
-            self.x_pos -= self.VEL 
-        else:
-            None
+
+
+class PongPlateWSAD():
+    def __init__(self):
+
+        self.widgh = 20
+        self.height = height / 2 - 70
+
+        self.plate_wh = plate_wh
+        self.plate_ht = plate_ht
+    
+    def draw_plate(self):
+        self.plate = pygame.Rect(self.widgh, self.height, self.plate_wh,self.plate_ht)
+        pygame.draw.rect(screen,white,self.plate)
 
     def reset(self):
-        self.x_pos = self.x_og 
-        self.y_pos = self.y_og
-        
+        self.widgh = 20
+        self.height = height / 2 - 70
 
-# right plate is operated by a human with arrow keys
-class RightPlate:
-
-    #beginning positions for x and y
-    x_og = 1 
-    y_og = 1 
-
+class Ball():
     def __init__(self):
 
-        self.x_pos = self.x_og 
-        self.y_pos = self.y_og
+        self.widgh = widgh / 2
+        self.height = height / 2
 
-        self.body = (1,2,plate_wh,plate_ht)
-        self.move = False
+        self.radius = radius
+
+    def draw_ball(self):
+        pygame.draw.circle(screen,white,(self.widgh,self.height),self.radius)
+        
+
+class Main():
+
+
+    def __init__(self):
+        
+        self.pongplate2 = PongPlateArrows()
+        self.pongplate1 = PongPlateWSAD()
+        self.ball = Ball()
+
+        game_on = True
+        while game_on:
+            self.whileloop()
     
-    def draw(self):
-        pygame.draw.rect(screen,white,self.body)
-
-    def move_plate(self):
-        if self.move == True:
-            self.x_pos -= self.VEL 
-        else:
-            None
-
-    def reset(self):
-        self.x_pos = self.x_og 
-        self.y_pos = self.y_og
+    def whileloop(self):
         
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.end_game()
+            if event.type == screen_update:
+                self.update()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    if self.pongplate2.height != 0:
+                        self.pongplate2.height -= 5
+    
+                if event.key == pygame.K_DOWN:
+                    if self.pongplate2.height != height: 
+                        self.pongplate2.height += 5
 
-
-class Main:
-    def __init__(self):
-        
-        self.game_on = True
-
-
-
-        while self.game_on:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.quit()
-
-                if event.type == screen_update:
-                    self.update()        
-                
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                        None
-        
-                    if event.key == pygame.K_DOWN:
-                        None
-            
+                if event.key == pygame.K_w:
+                    if self.pongplate1.height != 0:
+                        self.pongplate1.height -= 5
+    
+                if event.key == pygame.K_s:
+                    if self.pongplate1.height != height: 
+                        self.pongplate1.height += 5
+    
+    
+            self.place_elements()
             pygame.display.update()
-            clock.tick(fps)
+            clock.tick(fps) # FPS = 60
 
+    
     def update(self):
         None
 
-    def quit(self):
-        self.game_on = False
+    def place_elements(self):
+        self.background()
+        self.pongplate2.draw_plate()
+        self.pongplate1.draw_plate()
+        self.ball.draw_ball()
+    
+    def check_collision(self):
+        None
+    
+    def background(self):
+        screen.fill(black)
+
+    def score(self):
+        None
+    
+    def end_game(self):
         pygame.quit()
         sys.exit()
-        
 
 
 if __name__ == "__main__":

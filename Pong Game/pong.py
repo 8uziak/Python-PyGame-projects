@@ -94,7 +94,7 @@ class Main():
                         self.pongplate2.height -= 5
     
                 if event.key == pygame.K_DOWN:
-                    if self.pongplate2.height != height: 
+                    if self.pongplate2.height != height - plate_ht: 
                         self.pongplate2.height += 5
 
                 if event.key == pygame.K_w:
@@ -102,7 +102,7 @@ class Main():
                         self.pongplate1.height -= 5
     
                 if event.key == pygame.K_s:
-                    if self.pongplate1.height != height: 
+                    if self.pongplate1.height != height - plate_ht: 
                         self.pongplate1.height += 5
     
     

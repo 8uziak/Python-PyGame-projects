@@ -15,7 +15,7 @@ screen_update = pygame.USEREVENT
 pygame.time.set_timer(screen_update, 200)
 
 black = pygame.Color(0,0,0)
-white = pygame.Color(255,255,255)
+red = pygame.Color(255,0,0)
 
 while True:
 

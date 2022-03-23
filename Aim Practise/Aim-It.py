@@ -28,7 +28,7 @@ while True:
             sys.exit()
         if event.type == screen_update:
             None
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN: #to implement mouse click
             None
         
 

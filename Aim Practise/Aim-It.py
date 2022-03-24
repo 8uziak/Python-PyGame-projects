@@ -23,7 +23,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == screen_update:
+        if event.type == screen_update: # just XD i need a break fr 
             None
         if event.type == pygame.KEYDOWN: #press mouse button
             None
